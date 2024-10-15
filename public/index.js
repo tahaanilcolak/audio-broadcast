@@ -15,7 +15,7 @@ function createPeer() {
   const peer = new RTCPeerConnection({
     iceServers: [
       {
-        urls: "stun:stun.stunprotocol.org",
+        urls: "stun:192.168.1.120:3478",
       },
     ],
   });
