@@ -55,4 +55,4 @@ function handleTrackEvent(e, peer) {
   senderStream = e.streams[0];
 }
 
-app.listen(3000, () => console.log("server started"));
+app.listen(80, () => console.log("server started"));
