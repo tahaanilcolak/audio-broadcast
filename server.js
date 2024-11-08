@@ -1,3 +1,5 @@
+const https = require("https");
+const fs = require("fs");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -5,9 +7,14 @@ const webrtc = require("wrtc");
 
 let senderStream;
 
+const options = {
+  key: fs.readFileSync("192.168.4.1-key.pem"),
+  cert: fs.readFileSync("192.168.4.1.pem"),
+};
+
 app.set("view engine", "ejs"); // EJS'yi view engine olarak ayarlayın
 app.set("views", __dirname + "/views"); // views klasörünü ayarla
-app.use(express.static("public")); // Statik dosyalar için public klasörünü kullan
+app.use(express.static(__dirname + "/public"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -88,4 +95,8 @@ function handleTrackEvent(e, peer) {
   }
 }
 
-app.listen(3000, () => console.log("server started"));
+https.createServer(options, app).listen(3000, () => {
+  console.log("HTTPS sunucusu çalışıyor: https://192.168.4.1");
+});
+
+//app.listen(3000, () => console.log("server started"));
