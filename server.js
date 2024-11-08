@@ -35,7 +35,7 @@ app.post("/broadcast", async ({ body }, res) => {
   const peer = new webrtc.RTCPeerConnection({
     iceServers: [
       {
-        urls: "stun:192.168.1.120:3478", //stun:stun.stunprotocol.org
+        urls: "stun:192.168.4.1:3478", //stun:stun.stunprotocol.org
       },
     ],
   });
